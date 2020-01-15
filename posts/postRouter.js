@@ -5,9 +5,13 @@ const router = express.Router();
 const Posts = require("./postDb.js");
 
 router.get("/", (req, res) => {
-  Posts.get().then(result => {
-    res.status(200).json(result.message);
-  });
+  Posts.get()
+    .then(result => {
+      res.status(200).json(result.message);
+    })
+    .catch(err => {
+      res.status(500).json(result.message);
+    });
 });
 
 router.get("/:id", validatePostId, (req, res) => {
